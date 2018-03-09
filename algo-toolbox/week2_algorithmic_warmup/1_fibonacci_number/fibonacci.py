@@ -1,5 +1,8 @@
 # Uses python3
-def calc_fib(n):
+def calc_fib(x):
+    if (n < 0):
+        return 'no negative numbers please'
+
     if (n <= 1):
         return n
 
