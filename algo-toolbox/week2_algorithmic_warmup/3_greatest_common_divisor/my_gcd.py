@@ -18,5 +18,11 @@ def gcd_euclid(a, b):
   aPrime = a % b
   return gcd_euclid(b, aPrime)
 
-print(gcd_euclid(10, 5))
+# print(gcd_euclid(10, 5))
+
+if __name__ == "__main__":
+    # input = sys.stdin.read()
+    input = input()
+    a, b = map(int, input.split())
+    print(gcd_euclid(a, b))
   
