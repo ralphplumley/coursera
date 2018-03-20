@@ -1,5 +1,7 @@
 # Uses python3
 import sys
+# from decimal import *
+# getcontext().prec = 4
 
 # backpack = 9lbs max
 # saffron $5000 | 4 lbs
@@ -13,44 +15,42 @@ def get_optimal_value(capacity, weights, values):
     cap = capacity
 
     n = len(weights)
-    i = 0
-    j = 0
+    
+    while (capacity > 0):
+      bestValue = 0.000
+      bestValueIndex = None
 
-    while i < n:
-      if cap == 0:
-        return totalValue
+      for i in range(n):
+        # print('-------------')
+        # print('i: ', i)
+        # print('value[i]: ', values[i])
+        # print('weight[i]: ', weights[i])
 
-      bestItemValue = 0
+        if (weights[i] > 0):
+          currentValue = round(float(values[i]), 4) / round(float(weights[i]), 4)
+          # print('currentValue: ', currentValue)
 
-      while j < n:
-        currentValue = (values[j]/weights[j])
+        if (weights[i] > 0 and (currentValue > bestValue)):
+          bestValue = currentValue
+          bestValueIndex = i
 
-        # print('--------------')
-        # print('values[j]', values[j])
-        # print('weights[j]', weights[j])
-        # print('currentValue', currentValue)
+      # print('bestValue: ', bestValue)
+      # print('bestValueIndex: ', bestValueIndex)
+      # print('weights[bestValueIndex]: ', weights[bestValueIndex])
 
-        if (weights[j] > 0):
-          if ( currentValue > bestItemValue ):
-            bestItemValue = currentValue
+      if (int(weights[bestValueIndex]) <= int(capacity)):
+        totalValue += (bestValue * weights[bestValueIndex])
+        capacity = capacity - weights[bestValueIndex]
+        weights[bestValueIndex] -= weights[bestValueIndex]
+      else:
+        amountToTake = capacity - weights[bestValueIndex]
+        totalValue += (bestValue * (capacity - amountToTake))
+        weights[bestValueIndex] - amountToTake
+        capacity = capacity - amountToTake;
 
-        a = min(weights[j], cap)
+      # capacity = 0 # <-- make sure to delete
 
-        j += 1
-
-
-      print('bestItemValue: ', bestItemValue)
-      i += 1
-      
-    return 11111111111111
-
-
-def getBiggerValue(a, b):
-  if (a >= b):
-    return a
-
-  if (b > a):
-    return b
+    return totalValue
 
 if __name__ == "__main__":
     # data = list(map(int, sys.stdin.read().split()))
@@ -61,11 +61,3 @@ if __name__ == "__main__":
     weights = data[3:(2 * n + 2):2]
     opt_value = get_optimal_value(capacity, weights, values)
     print("{:.10f}".format(opt_value))
-
-# While Knapsack is not full
-  # Choose item i w/ maximum vi / wi
-
-  # If item fits into knapsack, take all of it
-  # Otherwise, take so much as to fill the knapsack
-
-# Return total value and amounts taken

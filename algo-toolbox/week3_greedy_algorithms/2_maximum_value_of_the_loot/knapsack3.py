@@ -9,29 +9,32 @@ import sys
 #input: 3 9 5000 4 200 3 10 5
 
 def get_optimal_value(capacity, weights, values):
-    # write your code here
-    print('capacity: ', capacity)
-    print('weights: ', weights)
-    print('values: ', values)
-
-    # print(capacity // weights[0])
-    # print((capacity % weights[0]) // weights[1])
-    # print(capacity // weights[0])
-
-    arr = []
-    v = 0
-    cap = capacity
-
-    for element in weights:
-        if capacity == 0:
-            return arr[v]
-
     
+    totalValue = float(0)
+    ratios = [float(value) / float(weight) for value, weight in zip(values, weights)]
+
+    for i in range(len(weights)):
+        if capacity == 0:
+            return totalValue
+            break
+
+        max_weight = max(ratios)
+        index = ratios.index(max_weight)
+
+        ratios[index] = 0
+        
+        weightToAdd = min(capacity, weights[index])
+
+        totalValue += weightToAdd * max_weight
+        weights[index] -= weightToAdd
+        capacity -= weightToAdd
+
+    return totalValue
 
 
 if __name__ == "__main__":
-    # data = list(map(int, sys.stdin.read().split()))
-    data = list(map(int, input().split()))
+    data = list(map(int, sys.stdin.read().split()))
+    # data = list(map(int, input().split()))
     
     n, capacity = data[0:2]
     values = data[2:(2 * n + 2):2]
