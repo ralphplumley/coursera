@@ -20,11 +20,12 @@ let weights = [20, 50, 30];
 
 let knapsack = function(capacity, weights, values) {
   totalValue = 0;
-  // debugger;
+  debugger;
   while (capacity > 0) {
 
     let bestValue = 0;
     let bestValueIndex;
+
     for (var i = 0; i < weights.length; i++) {
       let currentValue = values[i]/weights[i];
       if (weights[i] > 0 && (currentValue > bestValue)) {
@@ -32,18 +33,17 @@ let knapsack = function(capacity, weights, values) {
         bestValueIndex = i;
       }
     }
-
-    if (weights[bestValueIndex] < capacity) {
+    
+    if (weights[bestValueIndex] <= capacity) {
       totalValue += (bestValue * weights[bestValueIndex]);
-      capacity -= weights[bestValueIndex];
+      capacity = capacity - weights[bestValueIndex];
       weights[bestValueIndex] -= weights[bestValueIndex];
     } else {
-      let amountToTake = weights[bestValueIndex] - capacity;
+      let amountToTake = capacity - weights[bestValueIndex];
       totalValue += (bestValue * (capacity - amountToTake));
       weights[bestValueIndex] - amountToTake;
-      capacity -= amountToTake;
+      capacity = capacity - amountToTake;
     }
-
   }
 
   return totalValue;
