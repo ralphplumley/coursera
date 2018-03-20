@@ -20,7 +20,6 @@ let weights = [20, 50, 30];
 
 let knapsack = function(capacity, weights, values) {
   totalValue = 0;
-  debugger;
   while (capacity > 0) {
 
     let bestValue = 0;

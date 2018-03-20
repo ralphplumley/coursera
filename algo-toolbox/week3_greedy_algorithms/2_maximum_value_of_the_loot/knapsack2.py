@@ -9,16 +9,6 @@ import sys
 #input: 3 9 5000 4 200 3 10 5
 
 def get_optimal_value(capacity, weights, values):
-    # write your code here
-    # print('capacity: ', capacity)
-    # print('weights: ', weights)
-    # print('values: ', values)
-
-    # print(capacity // weights[0])
-    # print((capacity % weights[0]) // weights[1])
-    # print(capacity // weights[0])
-
-    arr = []
     totalValue = 0
     cap = capacity
 
