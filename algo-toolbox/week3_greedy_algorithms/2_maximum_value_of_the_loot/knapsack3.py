@@ -33,11 +33,22 @@ def get_optimal_value(capacity, weights, values):
 
 
 if __name__ == "__main__":
-    data = list(map(int, sys.stdin.read().split()))
-    # data = list(map(int, input().split()))
-    
+    # data = list(map(int, sys.stdin.read().split()))
+    data = list(map(int, input().split()))
+    print('data', data)
+
     n, capacity = data[0:2]
+    print('n: ', n)
+    print('capacity: ', capacity)
+    print('data[0:3]: ', data[0:3])
+
     values = data[2:(2 * n + 2):2]
+    print('values: ', values)
+    
     weights = data[3:(2 * n + 2):2]
+    print('weights: ', weights)
+    
     opt_value = get_optimal_value(capacity, weights, values)
+    print('opt_value: ', opt_value)
+    
     print("{:.10f}".format(opt_value))
