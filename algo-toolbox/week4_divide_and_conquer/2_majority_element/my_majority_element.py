@@ -28,8 +28,6 @@ def get_majority_element(a, left, right):
         else:
             count[currentElement] = 1
 
-    print('count: ', count)
-
     return 0
 
 if __name__ == '__main__':
